@@ -4,13 +4,14 @@
 """
 
 from pathlib import Path
-import requests
+import sqlite3
 from datetime import datetime, timedelta, date
 from typing import Any
 
+import requests
 import apimoex
 import pandas as pd
-import sqlite3
+
 
 import sqlighter3_RTS_minute  # !!!
 
