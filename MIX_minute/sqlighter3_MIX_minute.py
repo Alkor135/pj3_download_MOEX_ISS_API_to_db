@@ -58,7 +58,10 @@ def add_row(connection, cursor, tradedatetime, secid, open, low, high, close, vo
 
 
 def get_tradedate_future(connection):  # Используется для перебора дат в
-    """ Возвращает Dataframe с: дата торгов, короткое имя, последний день торгов из БД SQL по фьючерсам """
+    """ 
+    Возвращает Dataframe с: дата торгов, короткое имя, 
+    последний день торгов из БД SQL по фьючерсам 
+    """
     with connection:
         return pd.read_sql('SELECT `TRADEDATE`, `SHORTNAME`, `LSTTRADE` FROM `Day`', connection)
 
@@ -72,7 +75,10 @@ def get_tradedate_future_update(connection, start_date):
 
 
 def get_tradedate_future_date(connection, cursor, datedraw):
-    """ Возвращает: дата торгов, low, high, close, короткое имя, последний день торгов из БД SQL на дату """
+    """ 
+    Возвращает: дата торгов, low, high, close, короткое имя, 
+    последний день торгов из БД SQL на дату 
+    """
     with connection:
         return cursor.execute('SELECT LOW, HIGH, CLOSE, SHORTNAME, LSTTRADE '
                               'FROM Day WHERE TRADEDATE = ?', (datedraw,)).fetchall()[0]
@@ -99,3 +105,4 @@ if __name__ == '__main__':  # Создание БД, если её не суще
     connection: Any = sqlite3.connect(fr'{path_bd}\{file_bd}', check_same_thread=True)
     cursor: Any = connection.cursor()
     create_tables(connection, cursor)  # Создание таблиц в БД если их нет
+    
